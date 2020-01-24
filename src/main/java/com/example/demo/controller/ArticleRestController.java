@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AjaxResponse;
 import com.example.demo.model.Article;
+import com.example.demo.service.ArticleRestService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -15,12 +18,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/rest")
 public class ArticleRestController {
 
+    @Resource
+    ArticleRestService articleRestService;
+
     //增加一篇Article ，使用POST方法
 //    @RequestMapping(value = "/article", method = POST, produces = "application/json")
     @PostMapping("/article")
     public AjaxResponse saveArticle(@RequestBody Article article) {
         //因为使用了lombok的Slf4j注解，这里可以直接使用log变量打印日志
         log.info("saveArticle：{}", article);
+        log.info("articleRestService return :" + articleRestService.saveArticle(article));
         return AjaxResponse.success(article);
     }
 

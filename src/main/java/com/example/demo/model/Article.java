@@ -20,13 +20,13 @@ public class Article {
     @JsonIgnore // 属性忽略
     private Long id;
 
-    @JsonProperty("auther") // 属性别名
+    //@JsonProperty("auther") // 属性别名
     private String author;
     private String title;
     private String content;
 
     @JsonInclude(JsonInclude.Include.NON_NULL) // 属性空值不参加序列化
-//    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT +8") // 自定义日期格式
+    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT +8") // 自定义日期格式
     private Date createTime;
     private List<Reader> reader;
 
