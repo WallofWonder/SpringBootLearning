@@ -6,6 +6,7 @@ import com.example.demo.model.Article;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
@@ -25,12 +26,15 @@ public class ArticleRestJDBCServiceImpl implements ArticleRestService{
     JdbcTemplate secondaryJdbcTemplate;
 
 
+    @Transactional
     @Override
     public Article saveArticle(Article article) {
 
         articleJDBCDAO.save(article, primaryJdbcTemplate);
 
         articleJDBCDAO.save(article, secondaryJdbcTemplate);
+
+        //int a = 2/0; // 模拟异常
 
         return article;
     }
