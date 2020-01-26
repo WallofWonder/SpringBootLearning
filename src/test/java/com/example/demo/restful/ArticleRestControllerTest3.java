@@ -6,7 +6,7 @@ package com.example.demo.restful;
 
 import com.example.demo.controller.ArticleRestController;
 import com.example.demo.model.Article;
-import com.example.demo.service.ArticleRestService;
+import com.example.demo.service.ArticleRestJDBCServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class ArticleRestControllerTest3 {
     private MockMvc mockMvc;
 
     @MockBean
-    ArticleRestService articleRestService;
+    ArticleRestJDBCServiceImpl articleRestService;
 
 
     //mock对象初始化
@@ -64,7 +64,7 @@ public class ArticleRestControllerTest3 {
         Article articleObj = objectMapper.readValue(article, Article.class);
 
         // 打桩
-        when(articleRestService.saveArticle(articleObj)).thenReturn("ok");
+        when(articleRestService.saveArticle(articleObj)).thenReturn(articleObj);
 
         // 模拟请求，设置响应预期
         MvcResult result = mockMvc.perform(

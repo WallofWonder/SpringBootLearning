@@ -2,18 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AjaxResponse;
 import com.example.demo.model.Article;
+import com.example.demo.service.ArticleRestJDBCServiceImpl;
 import com.example.demo.service.ArticleRestService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 
 @Slf4j
@@ -21,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/rest")
 public class ArticleRestController {
 
-    @Resource
+    @Resource(name = "articleRestJDBCServiceImpl")
     ArticleRestService articleRestService;
 
 
@@ -40,7 +38,7 @@ public class ArticleRestController {
     @PostMapping("/article")
     public AjaxResponse saveArticle(@RequestBody Article article) {
         //因为使用了lombok的Slf4j注解，这里可以直接使用log变量打印日志
-        log.info("saveArticle：{}", article);
+
         log.info("articleRestService return :" + articleRestService.saveArticle(article));
         return AjaxResponse.success(article);
     }
@@ -50,7 +48,9 @@ public class ArticleRestController {
 //    @RequestMapping(value = "/article/{id}", method = DELETE, produces = "application/json")
     @DeleteMapping("/article/{id}")
     public AjaxResponse deleteArticle(@PathVariable Long id) {
-        log.info("deleteArticle：{}", id);
+
+        articleRestService.deleteArticle(id);
+
         return AjaxResponse.success(id);
     }
 
@@ -59,7 +59,9 @@ public class ArticleRestController {
     @PutMapping("/article/{id}")
     public AjaxResponse updateArticle(@PathVariable Long id, @RequestBody Article article) {
         article.setId(id);
-        log.info("updateArticle：{}", article);
+
+        articleRestService.updateArticle(article);
+
         return AjaxResponse.success(article);
     }
 
@@ -68,13 +70,15 @@ public class ArticleRestController {
     @GetMapping("/article/{id}")
     public AjaxResponse getArticle(@PathVariable Long id) {
 
-        //使用lombok提供的builder构建对象
-        Article article1 = Article.builder()
-                .id(1L)
-                .author("zimug")
-                .content("spring boot 2.深入浅出")
-                .createTime(new Date())
-                .title("t1").build();
-        return AjaxResponse.success(article1);
+        return AjaxResponse.success(articleRestService.getArticle(id));
     }
+
+    //获取一篇Article，使用GET方法
+//    @RequestMapping(value = "/article/{id}", method = GET, produces = "application/json")
+    @GetMapping("/article")
+    public AjaxResponse getAllArticle() {
+
+        return AjaxResponse.success(articleRestService.getAll());
+    }
+
 }
