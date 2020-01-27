@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @JsonPropertyOrder(value = {"content", "title"}) // 更改属性序列化顺序
-public class Article {
+public class ArticleVO {
 
     @JsonIgnore // 属性忽略
     private Long id;
@@ -28,6 +28,7 @@ public class Article {
     @JsonInclude(JsonInclude.Include.NON_NULL) // 属性空值不参加序列化
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss", timezone = "GMT +8") // 自定义日期格式
     private Date createTime;
+
     private List<Reader> reader;
 
 
