@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.jpa.testdb;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

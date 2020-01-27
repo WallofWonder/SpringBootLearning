@@ -1,7 +1,7 @@
 package com.example.demo.jpa;
 
-import com.example.demo.dao.Article;
-import com.example.demo.dao.ArticleRepository;
+import com.example.demo.jpa.testdb.Article;
+import com.example.demo.jpa.testdb.ArticleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

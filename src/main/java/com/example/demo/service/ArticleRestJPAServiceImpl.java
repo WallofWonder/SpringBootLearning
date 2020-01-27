@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.Article;
-import com.example.demo.dao.ArticleRepository;
+import com.example.demo.jpa.testdb.Article;
+import com.example.demo.jpa.testdb.ArticleRepository;
+import com.example.demo.jpa.testdb2.Message;
+import com.example.demo.jpa.testdb2.MessageRepository;
 import com.example.demo.model.ArticleVO;
 import com.example.demo.utils.DozerUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +22,20 @@ public class ArticleRestJPAServiceImpl implements ArticleRestService {
     private ArticleRepository articleRepository;
 
     @Resource
+    private MessageRepository messageRepository;
+
+    @Resource
     private Mapper dozerMapper;
 
     public ArticleVO saveArticle(ArticleVO article) {
 
         Article articlePO = dozerMapper.map(article, Article.class);
         articleRepository.save(articlePO);    //保存一个对象到数据库，insert
+
+        Message message = new Message();
+        message.setName("kobe");
+        message.setContent("退役啦");
+        messageRepository.save(message);
 
         return article;
     }
