@@ -18,3 +18,7 @@ spring:
 logging:
   level:
     com.example.demo: debug
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
