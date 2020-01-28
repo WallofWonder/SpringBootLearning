@@ -15,9 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @JsonPropertyOrder(value = {"content", "title"}) // 更改属性序列化顺序
-public class Article {
+public class ArticleVO {
 
-    @JsonIgnore // 属性忽略
+    //@JsonIgnore // 属性忽略
     private Long id;
 
     //@JsonProperty("auther") // 属性别名

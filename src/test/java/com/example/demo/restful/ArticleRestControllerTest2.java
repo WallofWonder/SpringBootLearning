@@ -4,7 +4,7 @@
 
 package com.example.demo.restful;
 
-import com.example.demo.service.ArticleRestService;
+import com.example.demo.service.ArticleMybatisRestServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,7 @@ public class ArticleRestControllerTest2 {
     private MockMvc mockMvc;
 
     @Resource
-    ArticleRestService articleRestService;
+    ArticleMybatisRestServiceImpl articleRestService;
 
     //mock对象初始化
 //    @BeforeEach
