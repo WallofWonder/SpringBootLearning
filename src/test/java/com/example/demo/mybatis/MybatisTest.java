@@ -1,7 +1,7 @@
 package com.example.demo.mybatis;
 
-import com.example.demo.generator.Article;
-import com.example.demo.generator.ArticleMapper;
+import com.example.demo.generator.testdb.Article;
+import com.example.demo.generator.testdb.ArticleMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;

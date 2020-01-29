@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.generator.Article;
-import com.example.demo.generator.ArticleMapper;
+import com.example.demo.generator.testdb.Article;
+import com.example.demo.generator.testdb.ArticleMapper;
+import com.example.demo.generator.testdb2.Message;
+import com.example.demo.generator.testdb2.MessageMapper;
 import com.example.demo.model.ArticleVO;
 import com.example.demo.utils.DozerUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +22,21 @@ public class ArticleMybatisRestServiceImpl implements ArticleRestService{
     @Resource
     private ArticleMapper articleMapper;
 
+    @Resource
+    private MessageMapper messageMapper;
 
     //新增
     @Override
     public ArticleVO saveArticle(ArticleVO article) {
         Article articlePO = dozerMapper.map(article,Article.class);
         articleMapper.insert(articlePO);
+
+        Message message = new Message();
+        message.setName("curry");
+        message.setContent("厉害");
+
+        messageMapper.insert(message);
+
         return null;
     }
 

@@ -1,4 +1,4 @@
-package com.example.demo.generator;
+package com.example.demo.generator.testdb;
 
 import java.util.ArrayList;
 import java.util.Date;

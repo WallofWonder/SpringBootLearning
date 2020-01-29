@@ -1,7 +1,5 @@
-package com.example.demo.generator;
+package com.example.demo.generator.testdb;
 
-import com.example.demo.generator.Article;
-import com.example.demo.generator.ArticleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
