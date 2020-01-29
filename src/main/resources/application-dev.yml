@@ -6,18 +6,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-  datasource:
-    primary:
-      jdbc-url: jdbc:mysql://localhost:3306/testdb?useUnicode=true&characterEncoding=utf-8&useSSL=false
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
-    secondary:
-      jdbc-url: jdbc:mysql://localhost:3306/testdb2?useUnicode=true&characterEncoding=utf-8&useSSL=false
-      username: root
-      password: root
-      driver-class-name: com.mysql.cj.jdbc.Driver
-
 logging:
   level:
     com.zimug.bootlaunch: debug
@@ -25,3 +13,27 @@ logging:
 mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
+
+primarydb:
+  uniqueResourceName: primary
+  xaDataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+  xaProperties:
+    url: jdbc:mysql://localhost:3306/testdb?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    user: root
+    password: root
+  exclusiveConnectionMode: true
+  minPoolSize: 3
+  maxPoolSize: 10
+  testQuery: SELECT 1 from dual #由于采用HikiriCP，用于检测数据库连接是否存活。
+
+secondarydb:
+  uniqueResourceName: secondary
+  xaDataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+  xaProperties:
+    url: jdbc:mysql://localhost:3306/testdb2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    user: root
+    password: root
+  exclusiveConnectionMode: true
+  minPoolSize: 3
+  maxPoolSize: 10
+  testQuery: SELECT 1 from dual #由于采用HikiriCP，用于检测数据库连接是否存活。

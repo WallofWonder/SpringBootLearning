@@ -9,6 +9,7 @@ import com.example.demo.utils.DozerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,6 +28,7 @@ public class ArticleMybatisRestServiceImpl implements ArticleRestService{
 
     //新增
     @Override
+    @Transactional
     public ArticleVO saveArticle(ArticleVO article) {
         Article articlePO = dozerMapper.map(article,Article.class);
         articleMapper.insert(articlePO);
@@ -36,6 +38,8 @@ public class ArticleMybatisRestServiceImpl implements ArticleRestService{
         message.setContent("厉害");
 
         messageMapper.insert(message);
+
+        int a = 2/0;     //认为制造被除数为0的异常
 
         return null;
     }
