@@ -22,3 +22,7 @@ logging:
 mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
+
+context:
+  listener:
+    classes: com.example.demo.customlistener.MyListener3
