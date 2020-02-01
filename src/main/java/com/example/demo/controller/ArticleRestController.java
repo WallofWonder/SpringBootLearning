@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.AjaxResponse;
+import com.example.demo.config.exception.AjaxResponse;
 import com.example.demo.model.ArticleVO;
-import com.example.demo.service.ArticleMybatisRestServiceImpl;
 import com.example.demo.service.ArticleRestService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 
 @Slf4j
@@ -62,7 +60,7 @@ public class ArticleRestController {
 
         articleRestService.updateArticle(article);
 
-        return AjaxResponse.success(article);
+        return AjaxResponse.success();
     }
 
     //获取一篇Article，使用GET方法
