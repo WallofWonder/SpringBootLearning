@@ -12,6 +12,11 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  quartz:
+    job-store-type: JDBC #数据库存储quartz任务配置
+    jdbc:
+      initialize-schema: never #自动初始化表结构，第一次启动的时候这里写always
+
 #mybatis:
 #  mapper-locations: classpath:generator/*.xml
 
