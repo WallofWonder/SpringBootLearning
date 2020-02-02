@@ -24,9 +24,31 @@
         </RollingFile>
 
 
+        <RollingFile name="accessLog" fileName="./logs/demo-accessLog.log" filePattern="./logs/demo-accessLog-%d{yyyy-MM-dd-HH-mm}.log"
+                     append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS Z}\t%level\t%class\t%line\t%thread\t%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <!-- 此行以下为自动清理日志的配置 -->
+            <DefaultRolloverStrategy>
+                <Delete basePath="./logs">
+                    <!-- glob 项为需要自动清理日志的pattern -->
+                    <IfFileName glob="*.log"/>
+                    <!-- 30d 表示自动清理掉30天以前的日志文件 -->
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+            <!-- 此行以上为自动清理日志的配置 -->
+        </RollingFile>
+
+
     </Appenders>
 
     <Loggers>
+        <logger name="com.example.demo.config.accesslog.AccessLogInterceptor" level="info" addivitivity="false">
+            <AppenderRef ref="accessLog" />
+        </logger>
         <root level="info">
             <AppenderRef ref="CONSOLE" />
             <AppenderRef ref="runtimeFile" />
