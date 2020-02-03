@@ -5,7 +5,7 @@
             <PatternLayout charset="UTF-8" pattern="[%-5p] %d %c - %m%n" />
         </Console>
 
-        <RollingFile name="runtimeFile" fileName="./logs/demo.log" filePattern="./logs/demo-%d{yyyy-MM-dd-HH-mm}.log"
+        <RollingFile name="runtimeFile" fileName="./logs/demo.log" filePattern="./logs/demo-%d{yyyy-MM-dd}.log"
                      append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS Z}\t%level\t%class\t%line\t%thread\t%msg%n"/>
             <Policies>
@@ -24,7 +24,7 @@
         </RollingFile>
 
 
-        <RollingFile name="accessLog" fileName="./logs/demo-accessLog.log" filePattern="./logs/demo-accessLog-%d{yyyy-MM-dd-HH-mm}.log"
+        <RollingFile name="accessLog" fileName="./logs/demo-accessLog.log" filePattern="./logs/demo-accessLog-%d{yyyy-MM-dd}.log"
                      append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS Z}\t%level\t%class\t%line\t%thread\t%msg%n"/>
             <Policies>
