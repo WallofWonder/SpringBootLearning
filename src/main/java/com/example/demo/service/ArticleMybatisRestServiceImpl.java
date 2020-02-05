@@ -6,6 +6,9 @@ import com.example.demo.model.ArticleVO;
 import com.example.demo.utils.DozerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,28 +26,37 @@ public class ArticleMybatisRestServiceImpl implements ArticleRestService{
 
     //新增
     @Override
+    @CacheEvict(value = "article", key = "#article.getId()")
     public ArticleVO saveArticle(ArticleVO article) {
         Article articlePO = dozerMapper.map(article,Article.class);
         articleMapper.insert(articlePO);
-        return null;
+
+        // TODO 把readers数组存入数据库
+        article.setId(articlePO.getId());
+        return article;
     }
 
     //删除
     @Override
+    @CacheEvict(value = "article", key = "#id")
     public void deleteArticle(Long id) {
         articleMapper.deleteByPrimaryKey(id);
     }
 
     //更新
     @Override
-    public void updateArticle(ArticleVO article) {
+    @CacheEvict(value = "article", key = "#article.getId()")
+    public ArticleVO updateArticle(ArticleVO article) {
         Article articlePO = dozerMapper.map(article,Article.class);
         articleMapper.updateByPrimaryKeySelective(articlePO);
+        return article;
     }
 
     //查询
     @Override
+    @Cacheable(value = "article", key = "#id", condition = "#id > 1")
     public ArticleVO getArticle(Long id) {
+        // TODO 把读者信息查询出来赋值给articleVO
         return dozerMapper.map(articleMapper.selectByPrimaryKey(id),ArticleVO.class);
     }
     //查询所有

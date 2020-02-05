@@ -64,7 +64,6 @@ public class ArticleRestController {
         return AjaxResponse.success();
     }
 
-    @Cacheable("article")
     //获取一篇Article，使用GET方法
 //    @RequestMapping(value = "/article/{id}", method = GET, produces = "application/json")
     @GetMapping("/article/{id}")
