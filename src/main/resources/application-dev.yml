@@ -24,6 +24,12 @@ spring:
         max-idle: 8 # 连接池中的最大空闲连接 默认 8
         min-idle: 0 # 连接池中的最小空闲连接 默认 0
 
+  freemarker:
+    cache: false # 缓存配置 开发阶段应该配置为false 因为经常会改
+    suffix: .html # 模版后缀名 默认为ftl
+    charset: UTF-8 # 文件编码
+    template-loader-path: classpath:/templates/
+
   cache:
     type: redis
     redis:
