@@ -34,12 +34,12 @@ public class ArticleMybatisRestServiceImpl implements ArticleRestService{
         articleMapper.insert(articlePO);
 
         Message message = new Message();
-        message.setName("curry");
-        message.setContent("厉害");
+        message.setName(articlePO.getAuthor());
+        message.setContent(articlePO.getContent());
 
         messageMapper.insert(message);
 
-        int a = 2/0;     //认为制造被除数为0的异常
+        int a = 2/0;     //人为制造被除数为0的异常
 
         return null;
     }
